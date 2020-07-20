@@ -1,0 +1,102 @@
+<!-- <mat-form-field class="search-form">
+  <input matInput placeholder="&#61442; Search..." type="text"  name="search" [(ngModel)]="searchText" autocomplete="off">
+</mat-form-field>
+<button button="submit" mat-raised-button color="primary" style="margin-left: 10px;">Search</button> -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <div class="navbar-header">
+          <a  class="navbar-brand">Users Cards </a>
+      </div>
+      <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+              <mat-icon class="navbar-brand" fxFlex="10%" matTooltip="Logout" (click)="logout()" style="cursor: pointer;">power_settings_new</mat-icon>
+      </ul>
+  </div>
+</div>
+</nav>
+<mat-form-field class="search-form" floatLabel="never">
+<input matInput type="text"  placeholder="Search By Name" [(ngModel)]="searchText" (keyup)="onSearchClick(searchText)" />
+
+<mat-icon matSuffix fxFlex="10%" (click)="clearSearch()" style="cursor: pointer;" *ngIf="searchText">clear</mat-icon>
+</mat-form-field>
+<br>
+
+<div
+class="search-results"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+(scrolled)="onScroll()">
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  
+  <mat-card class="card-picture card" *ngFor="let a of obs | async ">
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="example-header-image"></div> -->
+      <mat-card-title>{{a.first_name+" "+a.last_name}}</mat-card-title>
+      <mat-card-subtitle>This person is a {{a.gender}} with email : {{a.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="a.imageurl">
+    <mat-card-actions>
+      <mat-icon fxFlex="10%" matTooltip="Like" (click)="onClick('like',a.first_name)" style="cursor: pointer;">thumb_up_alt</mat-icon>
+      <mat-icon fxFlex="10%" matTooltip="Comment" (click)="onClick('comment',a.first_name)" style="cursor: pointer;"> comment</mat-icon>
+      <mat-icon fxFlex="10%" matTooltip="Share" (click)="onClick('share',a.first_name)" style="cursor: pointer;" >share</mat-icon>
+    </mat-card-actions>
+  </mat-card>
+  <div *ngIf="noData | async" class="no-records">
+    No records found
+  </div>
+  
+</div>
+<br>
+<!-- <mat-paginator [pageSize]="8"></mat-paginator> -->
+</div>
+<ngx-spinner></ngx-spinner>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-scale-multiple">
+</ngx-spinner>
+
+<!-- <div fxLayout="row"  fxLayoutGap="12px"  [style.margin-top]="'12px'">
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+</div> -->

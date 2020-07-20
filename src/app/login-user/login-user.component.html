@@ -1,0 +1,55 @@
+<!-- <label style="color: brown;">Enter Username : 
+    <input type="text" value=''/>
+</label>
+<br><br>
+<label style="color: brown;">Enter Password : 
+    <input type="password" value=''/>
+</label>
+<br><br>
+<label style="align-content: center; margin-right: 20px;margin-left: 20%;">
+<button mat-raised-button>Submit</button></label> -->
+
+<mat-card>
+    <mat-card-title>Welcome User</mat-card-title>
+<mat-card-content>
+<form  #employeeForm="ngForm" class="container"  [formGroup]="loginUser" (ngSubmit)="onLogin()">
+  <p>
+    <mat-form-field >
+      <input type="text" matInput placeholder="Username" formControlName="useremail">
+      <mat-icon matSuffix>person_outline</mat-icon>
+      <mat-error *ngIf="hasError('useremail', 'required')">Username is required</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field >
+      <!-- <input type="password" matInput placeholder="Password" formControlName="password"> -->
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName = "password" #passcode placeholder="Password"> 
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+    </mat-form-field>
+  </p>
+
+  <div class="button">
+    <button type="submit"  mat-raised-button color="primary" [disabled]="!loginUser.valid">Login</button>
+    <button type="button" mat-raised-button color="warn" (click)="onRegister()" style="margin-left: 10px;">Register</button>
+  </div>
+<br><br>
+<p *ngIf="error" class="alert alert-danger mt-3 mb-0">
+            {{ errortext }}
+          </p>
+  <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div> -->
+</form>
+</mat-card-content>
+</mat-card>
+
+<ngx-spinner></ngx-spinner>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-scale-multiple">
+</ngx-spinner>

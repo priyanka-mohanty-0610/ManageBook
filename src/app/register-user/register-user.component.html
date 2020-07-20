@@ -1,0 +1,142 @@
+<form class="container" [formGroup]="registerUser">
+  <!--  <label style="color: brown;">First Name : <input type="text" value=
+        "" formControlName = "firstname"/></label><br><br>
+        <label style="color: brown;">Last Name : <input type="text" value=
+            "" formControlName = "lastname"/></label><br><br>
+            <label style="color: brown;">User's Age : <input type="number" value=
+                "" formControlName = "userAge"/></label><br><br>
+              <label style="color: brown;">Select Gen :<br><br></label> 
+              <mat-radio-group >
+                <mat-radio-button value="1" >Male</mat-radio-button><br>
+                <mat-radio-button value="2">Female</mat-radio-button>
+               </mat-radio-group><br><br>-->
+
+
+  <mat-form-field  class="example-full-width">
+    <mat-label style="color: brown;">First Name :</mat-label>
+    <input matInput placeholder="Enter your first name" formControlName = "firstname"  required>
+    <mat-hint>e.g. Priyanka</mat-hint>
+    <mat-error *ngIf="hasError('firstname', 'required')">First Name is required</mat-error>
+  <mat-error *ngIf="hasError('firstname', 'maxlength')">First name cannot be more than 10 characters</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" style="margin-left: 30px;">
+    <mat-label style="color: brown;">Last Name :</mat-label>
+    <input matInput placeholder="Enter your  last name" formControlName = "lastname" required>
+    <mat-hint>e.g Mohanty</mat-hint>
+  </mat-form-field>
+<br><br>
+  <mat-form-field class="example-full-width">
+    <mat-label  style="color: brown;">Email ID :</mat-label>
+    <input matInput placeholder="Enter your email address" formControlName = "useremail">
+    <mat-hint>e.g priyanka@gmail.com</mat-hint>
+  </mat-form-field>
+
+<mat-form-field class="example-full-width" style="margin-left: 30px;">
+  <mat-label style="color: brown;">Password</mat-label>
+  <input matInput [type]="hide ? 'password' : 'text'" formControlName = "password" #passcode maxlength="10"> 
+  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </button>
+  <mat-hint>{{passcode.value.length}}/10</mat-hint>
+</mat-form-field>
+
+  <p><br><br><label>Select Gender : </label><br>
+  <mat-radio-group aria-labelledby="example-radio-group-label"
+  class="example-radio-group" formControlName = "genderRadioButton">
+    <mat-radio-button  class="example-radio-button" *ngFor="let x of gender" [value]="x">{{x}}</mat-radio-button>
+    <!--<mat-radio-button value="2">Female</mat-radio-button>-->
+   </mat-radio-group></p>
+
+<mat-form-field class="example-full-width" >
+  <mat-label>Select a Plan : </mat-label>
+  <mat-select name="plan" formControlName = "plan">
+  <mat-option *ngFor="let abc of plan" [value]="abc.value">
+    {{abc.viewValue}}
+  </mat-option></mat-select></mat-form-field>
+  
+  <mat-form-field style="margin-left: 30px;" class="example-full-width">
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date of birth" formControlName="dateOfBirth" id="dateOfBirth" 
+        readonly (click)="picker.open()">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <hr><mat-card-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!registerUser.valid" (click) = "onSubmit()">Submit</button>
+    <button type="button" mat-raised-button color="warn" (click)="onCancel()" style="margin-left: 10px;">Cancel</button>
+  </mat-card-actions><br><br>
+<!-- <hr><button mat-raised-button [disabled]="!registerUser.valid" (click) = onSubmit()>Submit</button><br><br> -->
+
+</form>
+<div>
+
+ 
+  <!-- {{logThis(users)}} -->
+
+  <!-- <div class="col-md-12">
+  <a href="#power-boost-calc">Power Boost Calculator custom pipe with params</a><br>
+  <hr></div>
+
+<a id="power-boost-calc"></a>
+<h2>Power Boost Calculator</h2>
+<div>Normal power:<mat-form-field><input matInput [(ngModel)]="power"></mat-form-field></div>
+<div>Boost factor: <mat-form-field><input matInput [(ngModel)]="factor"></mat-form-field></div>
+<p>
+  Super Hero Power: {{power | exponentialStrength: factor}}
+</p> -->
+
+
+
+<mat-toolbar color="primary">
+  The list of registered Users : 
+</mat-toolbar>
+<mat-table  [dataSource]="dataSource"  class="mat-elevation-z8">
+   <!-- {{logThis(dataSource)}} -->
+  
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef>First Name  </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname | uppercase}} </mat-cell>
+    </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastname | uppercase}} </mat-cell>
+      </ng-container>
+
+        <ng-container matColumnDef="useremail">
+          <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.useremail}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="password">
+          <mat-header-cell *matHeaderCellDef> Password </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="genderRadioButton">
+          <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.genderRadioButton}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="plan">
+          <mat-header-cell *matHeaderCellDef> Plan </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.plan}} </mat-cell>
+        </ng-container>
+   
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<!--<table>
+  <tr>
+    
+    <th>First name</th>
+    <th>Last Name</th>
+  </tr>
+ 
+    <tr *ngFor ="let person of users">
+    <td>{{person.firstname}}</td>
+    <td>{{person.lastname}}</td>
+  </tr>
+</table>-->
+</div>

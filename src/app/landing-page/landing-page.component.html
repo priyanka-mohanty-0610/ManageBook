@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12">
+        <p class="list-group-item-text" style="font-weight: bolder;font-size: x-large; text-align-last: center;">Welcome Priyanka</p>
+    </div>
+</div>
+<hr>
+<div class="row onhover" (click)="RegisterModule()" style="cursor: pointer;">
+    <div class="col-xs-12">
+        <label  class="list-group-item clearfix" style="background-color: cornflowerblue;" *ngFor="let x of array">
+            <div class="pull-left">
+                <h4 class="list-group-item-heading" style="font-size: larger;">Users List</h4>
+                <p class="list-group-item-text" style="font-size: smaller;">This Page gives you the option to Add Users and view the list 
+                    of registered users</p>
+            </div>
+            <span class="pull-right">
+                <img [src]="x" alt=""  style="max-height: 100px;">
+            </span>
+        </label>
+        <!-- <app-recipe-item></app-recipe-item> -->
+    </div>
+</div>
+<hr>
+<div class="row onhover" (click)="ShoppingModule()" style="cursor: pointer;">
+    <div class="col-xs-12">
+        <label class="list-group-item clearfix" style="background-color: cornflowerblue;" *ngFor="let x of array">
+            <div class="pull-left">
+                <h4 class="list-group-item-heading" style="font-size: larger;">Recipe & shopping</h4>
+                <p class="list-group-item-text" style="font-size: smaller;">This page shows the list of recipies and also helps us to buy 
+                    the ingredients for it.</p>
+            </div>
+            <span class="pull-right">
+                <img [src]="x" alt="" class="img-responsive" style="max-height: 50px;" alt="" style="max-height: 100px;">
+            </span>
+        </label>
+        <!-- <app-recipe-item></app-recipe-item> -->
+    </div>
+</div>
